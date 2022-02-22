@@ -44,8 +44,7 @@ class productsController{
         }
         res.status(200).send({message:"delete complete"})
     }
-    
-    
+
 }
 
 
