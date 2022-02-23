@@ -11,6 +11,8 @@ const auth = async(req,res, next)=>{
     
     if(!user) throw new Error("invalid user")
 
+    if(user.role!="admin") throw new Error("this is not admin")
+    
     req.user = user
     req.token = token
     

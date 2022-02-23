@@ -33,7 +33,7 @@ class productsController{
         res.status(200).send({message:"edit complete"})
 
     }
-    static delProduct = (req,res)=>{
+    static delProduct = async(req,res)=>{
         const Product = await productModel.findOneAndRemove({
             userId:req.user._id,
             title:req.body.title

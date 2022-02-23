@@ -1,4 +1,4 @@
-const userModel = require("../../database/models/user.model")
+const userModel = require("../database/models/user.model")
 
 class User{
     static register= async(req,res)=>{
@@ -81,6 +81,20 @@ class User{
         }
         catch(e){
             res.send({apiStatus:false, data:e.message, message:"error deleting user"})
+        }
+    }
+    static registerAdmin = async(req,res) =>{
+        try{
+            const admin = new userModel({...req.body,role:'admin'})
+            await admin.save()
+            res.send({
+                apiStatus:true,
+                data:admin,
+                message:"success adding admin"
+            })
+        }
+        catch(e){
+            res.send({apiStatus:false, data:e.message, message:"not admin"})
         }
     }
 }

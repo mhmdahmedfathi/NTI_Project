@@ -1,7 +1,11 @@
 const router = require('express').Router()
-const userController = require("../app/controller/user.controller")
+const userController = require("../controller/user.controller")
 const auth = require('../middleware/auth')
+const adminAuth = require('../MiddleWare/adminAuth')
 router.post("/register", userController.register)
+
+router.post("/admin",adminAuth,userController.registerAdmin)
+
 router.post("/login", userController.login)
 router.get("/all", auth , userController.getAll)
 
