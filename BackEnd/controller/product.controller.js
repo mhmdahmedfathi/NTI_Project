@@ -7,42 +7,64 @@ class productsController{
         const Products = await productModel.find()
         res.status(200).send({data:Products})
     }
+
+    static UserProducts = async(req,res)=>{
+        await req.user.populate("MyProducts")
+        res.status(200).send({apiStatus:true, data:req.user.MyProducts, message:"added successfully"})
+
+    }
+
     static addProduct = async (req,res)=>{
-        const Product = new productModel({
-            userId:req.user._id,
-            ...req.body
-        })
-        await Product.save()
-        res.status(201).send({message:"added"})
+       try {
+            const Product = new productModel({
+                userId:req.user._id,
+                ...req.body
+            })
+            await Product.save()
+            res.status(201).send({apiStatus:true, data:Product, message:"added successfully"})
+        } catch (error) {
+            res.status(400).send({apiStatus:false, data:error.message, message:"invalid data"})    
+       }
     }
     static showSingle = async (req,res)=>{
-        const Product = await productModel.find({
-            title:req.body.title
-        })
-        res.status(200).send({data:Product})
+        try {
+            const Product = await productModel.find({
+                _id:req.params.id
+            })
+            res.status(200).send({apiStatus:true, data:Product, message:"retrive complete"})
+        } catch (error) {
+            res.status(400).send({apiStatus:false, data:error.message, message:"invalid data"})    
+        }
     }
     static editProduct = async (req,res)=>{
-        const Product = await productModel.findOneAndUpdate({
-            userId:req.user._id,
-            title:req.body.title
-        },{...req.body})
-
-        if(Product == null){
-            return res.status(401).send({err : "you are not Authroized to make this edition"})
+        try {
+            const Product = await productModel.findOneAndUpdate({
+                userId:req.user._id,
+                _id:req.params.id
+            },{...req.body})
+    
+            if(Product == null){
+                return res.status(401).send({apiStatus:true, data:Product, message:"you are not Authroized to make this edition"})
+            }
+            res.status(200).send({apiStatus:true, data:Product, message:"edit complete"}) 
+        } catch (error) {
+            res.status(400).send({apiStatus:false, data:error.message, message:"invalid data"})    
         }
-        res.status(200).send({message:"edit complete"})
-
     }
     static delProduct = async(req,res)=>{
-        const Product = await productModel.findOneAndRemove({
-            userId:req.user._id,
-            title:req.body.title
-        })
-
-        if(Product == null){
-            return res.status(401).send({err:"you are not Authorized to make this change"})
+        try {
+            const Product = await productModel.findOneAndRemove({
+                userId:req.user._id,
+                _id:req.params.id
+            })
+    
+            if(Product == null){
+               return res.status(401).send({apiStatus:true, data:Product, message:"you are not Authorized to make this change"}) 
+            }
+            res.status(200).send({apiStatus:true, data:Product, message:"delete complete"})
+        } catch (error) {
+            res.status(400).send({apiStatus:false, data:error.message, message:"invalid data"})     
         }
-        res.status(200).send({message:"delete complete"})
     }
 
 }

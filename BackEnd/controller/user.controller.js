@@ -27,6 +27,23 @@ class User{
             res.send({apiStatus:false, data:e.message, message:"invalid login"})
         }
     }
+
+    static AddUserProduct = async(req,res)=>{
+
+        req.body.Products.forEach(product => {
+            let index = req.user.product.findIndex(p => p._id == product._id)
+            if(index == -1){
+                req.user.product.push(product)
+            }else{
+                req.user.product[index].quantity += product.quantity
+            }
+        });
+
+        await req.user.save()
+        res.send({apiStatus:true,data:req.user, message:'product added'})
+
+    }
+
     static me = async(req,res)=>{
         res.send({apiStatus:true,data:req.user, message:'data featched'})
     }

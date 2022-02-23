@@ -1,9 +1,9 @@
 const jwt = require("jsonwebtoken")
 const userModel = require("../database/models/user.model")
-const auth = async(req,res, next)=>{
+const adminAuth = async(req,res, next)=>{
     try{
         
-    const token = req.header("Authorization").replace('bearer ', "")
+    const token = req.header("Authorization").replace('Bearer ', "")
     
     const d_token = jwt.verify(token, process.env.JWTKEY)
     
@@ -19,7 +19,7 @@ const auth = async(req,res, next)=>{
     next()
     }
     catch(e){
-        res.status(401).send({err:"Not Auth"})
+        res.status(401).send({err:e.message})
     }
 }
-module.exports = auth
+module.exports = adminAuth

@@ -17,10 +17,8 @@ const userSchema = mongoose.Schema({
     },
     product:[
         {
-            productId:Number,
-            quantity:String,
-            name:String,
-            price:Number
+            _id:mongoose.Schema.Types.ObjectId,
+            quantity:Number
         }
     ],
     email:{
@@ -83,5 +81,12 @@ userSchema.methods.generateToken = async function(){
     await user.save()
     return token
 }
+userSchema.virtual("MyProducts",{
+    ref:"Product",
+    localField:"_id",
+    foreignField:"userId"
+})
+
+
 const user = mongoose.model("user", userSchema)
 module.exports = user

@@ -1,2 +1,2 @@
 const mongoose = require('mongoose')
-mongoose.connect(process.env.dbUrl)
+mongoose.connect(process.env.dbURL)
