@@ -18,7 +18,8 @@ class productsController{
        try {
             const Product = new productModel({
                 userId:req.user._id,
-                ...req.body
+                ...req.body,
+                image:req.file.path
             })
             await Product.save()
             res.status(201).send({apiStatus:true, data:Product, message:"added successfully"})
