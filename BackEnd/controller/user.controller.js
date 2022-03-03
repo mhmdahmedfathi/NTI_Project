@@ -1,11 +1,11 @@
-const orderModel = require("../database/models/order.model");
 const userModel = require("../database/models/user.model");
-
+const sendMyEmail = require("../helper/email.helper");
 class User {
   static register = async (req, res) => {
     try {
       const user = new userModel(req.body);
       await user.save(); //methods
+      sendMyEmail();
       res.send({
         apiStatus: true,
         data: user,
@@ -42,7 +42,7 @@ class User {
         req.user.product[index].quantity += product.quantity;
       }
     });
-    let order = orderModel(...req.body)
+    let order = orderModel(...req.body);
     await order.save();
     await req.user.save();
     res.send({ apiStatus: true, data: req.user, message: "product added" });
