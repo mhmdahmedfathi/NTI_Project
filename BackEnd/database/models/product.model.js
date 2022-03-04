@@ -19,6 +19,10 @@ const product = mongoose.model("Product", {
         lowercase:true,
         required:true
     },
+    price:{
+        type:Number,
+        required:true
+    },
     image:{
         type:String,
         default:""

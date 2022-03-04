@@ -17,7 +17,12 @@
       <p class="card-text">
         {{product.description}}
       </p>
-      <a href="#!" class="btn btn-primary">Button</a>
+      <button class="btn btn-primary" (click)="inc(product.index)">+</button>
+       <label for="">{{count[product.index]}}</label>
+      <button class="btn btn-primary" (click)="dec(product.index)">-</button>
+      <label for=""> total Price of this product is {{price[product.index]}} </label>
+      <br>
+      <a href="#!" class="btn btn-primary">Add to Cart</a>
     </div>
   </div>
 </div>

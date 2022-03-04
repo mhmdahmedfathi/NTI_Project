@@ -36,12 +36,6 @@ class productsController {
       });
     }
   };
-  static getImage = async (req,res) =>{
-    const path = require("path")
-    console.log(req.params);
-    res.sendFile(path.join(__dirname ,`../${req.params.ImageId}`))
-    //res.sendFile(`images/${req.params.FolderId}/${req.params.ImageId}`)
-  }
   static showSingle = async (req, res) => {
     try {
       const Product = await productModel.find({

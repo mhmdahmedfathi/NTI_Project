@@ -45,6 +45,11 @@ const userSchema = mongoose.Schema({
     otp:{
         type:String
     },
+    Balance:{
+        type:Number,
+        required:true,
+        default:0
+    },
     tokens:[
         {    
             token:{

@@ -5,14 +5,14 @@ const order = mongoose.model("Order", {
         required:true,
         ref:"user"
     },
-    productId:{
-        type:mongoose.Schema.Types.ObjectId,
-        required:true,
-        ref:"Product"
-    },
-    title:{
-        type:String,
-        required:true
+    product:[
+        {
+            title:String,
+            quantity:Number
+        }
+    ],
+    totalPrice:{
+        type:Number
     }
 })
 module.exports = order

@@ -34,6 +34,8 @@ class User {
   };
 
   static AddUserProduct = async (req, res) => {
+    if(req.user.Balance < req.body.totalPrice)
+      return res.send({apiStatus:false,data:null,message:"you don't have enough balance"})
     req.body.Products.forEach((product) => {
       let index = req.user.product.findIndex((p) => p.title == product.title);
       if (index == -1) {
