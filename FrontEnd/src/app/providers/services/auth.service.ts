@@ -27,7 +27,19 @@ export class AuthService {
   GetProducts():Observable<any>{
     return this._http.get(`${this.commonApiURL}api/product`)
   }
-  GetImage(ProductImage:string):Observable<any>{
-    return this._http.get(`${this.commonApiURL}api/product/${ProductImage}`)
+  SubmitOrder(Order:any):Observable<any>{
+    return this._http.post(`${this.commonApiURL}api/user/AddUserProduct`,Order)
+  }
+  AddProduct(Product:any):Observable<any>{
+    return this._http.post(`${this.commonApiURL}api/product/addProduct`,Product)
+  }
+  AddImage(FormData:FormData):Observable<any>{
+    return this._http.post(`${this.commonApiURL}api/product/ImagePath`,FormData)
+  }
+  SingleProduct(Id:any):Observable<any>{
+    return this._http.post(`${this.commonApiURL}api/product/single/${Id}`,null)
+  }
+  editProduct(Product:any,Id:any):Observable<any>{
+    return this._http.post(`${this.commonApiURL}api/product/edit/${Id}`,null)
   }
 }

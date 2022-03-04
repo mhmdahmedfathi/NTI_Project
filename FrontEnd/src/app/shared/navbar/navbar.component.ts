@@ -20,7 +20,6 @@ export class NavbarComponent implements OnInit {
         this._auth.user=null
       },
       ()=>{
-        this._router.navigateByUrl("/home")
       }
     )
 

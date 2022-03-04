@@ -1,10 +1,8 @@
 export interface Product {
-    userId:{
-    }
-    title:{
-    }
-    description:{
-    }
-    image:{
-    }
+  userId: string;
+  title: string;
+  description: string;
+  image: string;
+  index: number;
+  price: number;
 }

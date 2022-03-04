@@ -1,3 +1,4 @@
+<div class="alert alert-danger" *ngIf="msg!=''">{{msg}}</div>
 <div class="products">
   <div *ngFor="let product of products" class="card product">
     <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
@@ -15,14 +16,19 @@
     <div class="card-body">
       <h5 class="card-title">{{product.title}}</h5>
       <p class="card-text">
-        {{product.description}}
+        {{product.description}} <br>
+        Price of this product is {{product.price}}
       </p>
-      <button class="btn btn-primary" (click)="inc(product.index)">+</button>
+      <button class="btn btn-primary"  ejs-button [disabled]="!notSubmit[product.index]" (click)="inc(product.index)">+</button>
        <label for="">{{count[product.index]}}</label>
-      <button class="btn btn-primary" (click)="dec(product.index)">-</button>
-      <label for=""> total Price of this product is {{price[product.index]}} </label>
+      <button class="btn btn-primary"  ejs-button [disabled]="!notSubmit[product.index]" (click)="dec(product.index)">-</button>
+      <label for=""> total Price from buying this product is {{price[product.index]}} </label>
       <br>
-      <a href="#!" class="btn btn-primary">Add to Cart</a>
+      <button href="#!" *ngIf="notSubmit[product.index];else Submitted" class="btn btn-primary" (click)="AddtoOrder(product.title,price[product.index],count[product.index],product.index)" >Add to Cart</button>
+      <ng-template #Submitted>
+        <button class="btn btn-primary" (click)="RemovefromOrder(product.title,price[product.index],count[product.index],product.index)">Remove from Cart</button>`
+      </ng-template>
+      <button class="btn btn-primary" (click)="SubmitOrder()" >Submit Order</button>
     </div>
   </div>
 </div>

@@ -20,7 +20,7 @@ class productsController {
       const Product = new productModel({
         userId: req.user._id,
         ...req.body,
-        image: `${req.file.path}`,
+        image: `${req.body.path}`,
       });
       await Product.save();
       res.status(201).send({

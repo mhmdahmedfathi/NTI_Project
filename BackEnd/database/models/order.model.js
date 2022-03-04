@@ -5,7 +5,7 @@ const order = mongoose.model("Order", {
         required:true,
         ref:"user"
     },
-    product:[
+    Products:[
         {
             title:String,
             quantity:Number

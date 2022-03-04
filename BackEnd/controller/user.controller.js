@@ -1,4 +1,5 @@
 const userModel = require("../database/models/user.model");
+const orderModel = require("../database/models/order.model")
 const sendMyEmail = require("../helper/email.helper");
 class User {
   static register = async (req, res) => {
@@ -35,7 +36,10 @@ class User {
 
   static AddUserProduct = async (req, res) => {
     if(req.user.Balance < req.body.totalPrice)
-      return res.send({apiStatus:false,data:null,message:"you don't have enough balance"})
+      return res.status(500).send({apiStatus:false,data:null,message:"you don't have enough balance"})
+    if(req.body.totalPrice ===0)
+      return res.status(500).send({apiStatus:false,data:null,message:"you should choose product first "})
+    
     req.body.Products.forEach((product) => {
       let index = req.user.product.findIndex((p) => p.title == product.title);
       if (index == -1) {
@@ -44,10 +48,15 @@ class User {
         req.user.product[index].quantity += product.quantity;
       }
     });
-    let order = orderModel(...req.body);
+    let order = orderModel({
+      userId:req.body.userId,
+      Products:req.body.Products,
+      totalPrice:req.body.totalPrice
+    });
+    req.user.Balance -= req.body.totalPrice
     await order.save();
     await req.user.save();
-    res.send({ apiStatus: true, data: req.user, message: "product added" });
+    res.send({ apiStatus: true, data: req.user, message: "Order added" });
   };
 
   static me = async (req, res) => {

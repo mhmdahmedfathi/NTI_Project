@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
       this._auth.login(this.loginForm.value).subscribe(
         (data)=>{
           console.log(data)
-          localStorage.setItem("g15Token", data.data.token)
+          localStorage.setItem("NTIProject", data.data.token)
         },
         (err)=>{
           this.msg="Unauthorized"

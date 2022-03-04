@@ -1,0 +1,94 @@
+<!-- template driven form -->
+<section class="my-5 container">
+  <h2 class="text-center text-primary">Add Product</h2>
+  <!-- <div>
+        {{registerForm.value|json}}- {{registerForm.valid}}-{{registerForm.submitted}}
+    </div> -->
+  <div
+    [ngClass]="{
+      alert: true,
+      'alert-primary': apiFlag,
+      'alert-danger': !apiFlag
+    }"
+    *ngIf="msg != ''"
+  >
+    {{ msg }}
+  </div>
+  <form [formGroup]="AddProductForm" (ngSubmit)="handleAddProduct()">
+    <div class="mb-3">
+      <label>title</label>
+      <input
+        name="title"
+        placeholder="title"
+        class="form-control"
+        required
+        minlength="3"
+        maxlength="10"
+        formControlName="title"
+        ngModel
+      />
+      <div
+        *ngIf="title?.invalid && (title?.dirty || title?.touched)"
+        class="alert alert-danger my-3"
+      >
+        <p *ngIf="title?.errors?.['required']">title is required</p>
+        <p *ngIf="title?.errors?.['minlength']">
+          title must be more than 3 chars
+        </p>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label>description</label>
+      <input
+        name="description"
+        placeholder="description"
+        class="form-control"
+        formControlName="description"
+        required
+        description
+        ngModel
+      />
+      <div
+        *ngIf="
+          description?.invalid && (description?.dirty || description?.touched)
+        "
+        class="alert alert-danger my-3"
+      >
+        <p *ngIf="description?.errors?.['required']">description is required</p>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label>price</label>
+      <input
+        name="price"
+        formControlName="price"
+        placeholder="price"
+        type="number"
+        class="form-control"
+        required
+        ngModel
+      />
+      <div
+        *ngIf="price?.invalid && (price?.dirty || price?.touched)"
+        class="alert alert-danger my-3"
+      >
+        <p *ngIf="price?.errors?.['required']">price is required</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="file">File</label>
+
+      <input
+        formControlName="file"
+        id="file"
+        type="file"
+        class="form-control"
+        (change)="onFileSelected($event)"
+      />
+    </div>
+
+    <div class="mb-3">
+      <button class="btn btn-primary">Add Product</button>
+    </div>
+  </form>
+</section>
