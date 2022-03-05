@@ -54,6 +54,7 @@ class productsController {
   };
   static editProduct = async (req, res) => {
     try {
+      console.log(req.body)
       const Product = await productModel.findOneAndUpdate(
         {
           userId: req.user._id,

@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
             user=>{
               this._auth.isLogin=true
               this._auth.user = user.data
+              this._auth.isAdmin = user.data.role == "admin" ? true : false
             },
             (e)=>{
               this._auth.isLogin=false

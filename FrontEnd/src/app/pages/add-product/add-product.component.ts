@@ -13,7 +13,7 @@ export class AddProductComponent implements OnInit {
   AddProductForm = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(3)]),
 
-    description: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(300)]),
+    description: new FormControl('', [Validators.required, Validators.minLength(3)]),
 
     price: new FormControl(0, [Validators.required]),
     
@@ -46,6 +46,7 @@ export class AddProductComponent implements OnInit {
     this._auth.AddProduct(this.AddProductForm.value).subscribe((data)=>{
       this.msg = data.message
       this.apiFlag = true
+      this._router.navigateByUrl("/")
     })
   }
 }

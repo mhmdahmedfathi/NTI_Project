@@ -9,7 +9,6 @@ const product = mongoose.model("Product", {
         type:String,
         trim:true,
         minLength:3,
-        maxLength:20,
         unique:true,
         required:true
     },

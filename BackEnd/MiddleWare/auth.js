@@ -17,7 +17,7 @@ const auth = async(req,res, next)=>{
     next()
     }
     catch(e){
-        res.status(401).send({err:"Not Auth"})
+        res.status(401).send({message:"you must login first to perform this function"})
     }
 }
 module.exports = auth

@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 export class AuthService {
   public isLogin : boolean = false
   public user: any = null
-
+  public productid:any=null
+  public isAdmin: boolean = false
   commonApiURL="http://localhost:3000/"
   constructor(private _http:HttpClient) { }
 
@@ -40,6 +41,12 @@ export class AuthService {
     return this._http.post(`${this.commonApiURL}api/product/single/${Id}`,null)
   }
   editProduct(Product:any,Id:any):Observable<any>{
-    return this._http.post(`${this.commonApiURL}api/product/edit/${Id}`,null)
+    return this._http.put(`${this.commonApiURL}api/product/edit/${Id}`,Product)
+  }
+  getOwnProducts():Observable<any>{
+    return this._http.get(`${this.commonApiURL}api/product/UserProducts`)
+  }
+  deleteProduct(Id:any):Observable<any>{
+    return this._http.delete(`${this.commonApiURL}api/product/del/${Id}`)
   }
 }

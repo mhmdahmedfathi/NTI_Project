@@ -13,6 +13,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { AuthInterceptor } from './providers/interceptors/auth.interceptor';
 import { AddProductComponent } from './pages/add-product/add-product.component';
 import { EditProductComponent } from './pages/edit-product/edit-product.component';
+import { ProductDashboardComponent } from './pages/product-dashboard/product-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { EditProductComponent } from './pages/edit-product/edit-product.componen
     FooterComponent,
     HomeComponent,
     AddProductComponent,
-    EditProductComponent
+    EditProductComponent,
+    ProductDashboardComponent
   ],
   imports: [
     BrowserModule,
