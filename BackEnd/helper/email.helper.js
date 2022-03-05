@@ -14,7 +14,7 @@ const sendMyEmail = async()=> {
             from: "test email",
             to: "ntiProjectg15@gmail.com",
             subject: "welcome at our awsome website",
-            text:"hi beedooooooooooooooooooooo"
+            text:"hello there. How are you ? We just send this email to celebrate with you that you entered our website"
         }
         await transporter.sendMail(mailOptions)
     }
